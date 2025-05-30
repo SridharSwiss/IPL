@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beyond the Sixes and Wickets: IPL & Data Analytics</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --primary-bg: linear-gradient(120deg, #243B55 0%, #141E30 100%);
@@ -22,8 +22,9 @@
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            line-height: 1.65;
             color: #232323;
             margin: 0;
             padding: 0;
@@ -31,59 +32,119 @@
             min-height: 100vh;
         }
 
-        header {
-            background: var(--nav-bg);
-            color: white;
-            padding: 17px 0 10px 0;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        /* ------ NAVIGATION ------ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(36,59,85,0.92);
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav ul li {
-            margin: 0 7px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 18px;
-            border-radius: 22px;
-            transition: 
-                background 0.25s,
-                color 0.25s,
-                transform 0.15s;
-            font-size: 1em;
-            background: rgba(255,255,255,0.09);
-        }
-        nav ul li a:hover, nav ul li a:focus {
-            background: linear-gradient(90deg, #ff5e62, #007bff 90%);
-            color: #fff;
-            transform: scale(1.08);
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            box-shadow: 0 2px 8px rgba(32,40,80,0.12);
         }
 
+        .navbar-logo {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            padding: 12px 0;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            gap: 22px;
+        }
+        .navbar-menu li {
+            position: relative;
+        }
+        .navbar-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.06rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 22px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.18s;
+        }
+        .navbar-menu a:hover, .navbar-menu a:focus, .navbar-menu .active {
+            background: linear-gradient(90deg, #ff5e62, #007bff 85%);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #243B55;
+            min-width: 175px;
+            top: 38px;
+            left: 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(32,40,80,0.15);
+            z-index: 200;
+        }
+        .dropdown:hover .dropdown-content, .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+        .dropdown-content li a {
+            display: block;
+            padding: 10px 16px;
+            font-size: 1.04rem;
+            border-radius: 0;
+            color: #fff;
+            background: none;
+        }
+        .dropdown-content li a:hover {
+            background: #007bff;
+            color: #fff;
+        }
+
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 8px;
+            }
+            .navbar-menu {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+            .navbar-logo {
+                padding: 10px 0 0 0;
+                font-size: 1.2rem;
+            }
+            .dropdown-content {
+                position: static;
+                min-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* ------ MAIN CONTENT ------ */
         main {
             max-width: 1100px;
-            margin: 35px auto 0 auto;
-            padding: 25px 18px;
-            background: rgba(255,255,255,0.88);
+            margin: 40px auto 0 auto;
+            padding: 36px 28px;
+            background: rgba(255,255,255,0.94);
             box-shadow: var(--shadow);
-            border-radius: 14px;
+            border-radius: 18px;
         }
 
         section {
-            margin-bottom: 38px;
+            margin-bottom: 44px;
             border-radius: 12px;
             background: var(--section-bg1);
             box-shadow: 0 2px 10px rgba(32,40,80,0.03);
-            padding: 38px 28px;
+            padding: 44px 34px;
             transition: background 0.2s;
         }
         section:nth-child(even) {
@@ -93,12 +154,13 @@
             margin-bottom: 0;
         }
 
+        /* ------ TYPOGRAPHY ------ */
         h1, h2, h3, h4 {
             font-weight: 700;
             margin-bottom: 18px;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 2.1rem;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -108,40 +170,44 @@
             letter-spacing: 1px;
         }
         h2 {
-            font-size: 2em;
+            font-size: 1.45rem;
             border-left: 7px solid var(--accent-blue);
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange) 90%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             padding-left: 13px;
-            margin-top: 25px;
+            margin-top: 23px;
         }
         h3 {
-            font-size: 1.3em;
+            font-size: 1.18rem;
             color: var(--accent-pink);
             margin-top: 19px;
         }
         h4 {
+            font-size: 1.08rem;
             color: var(--accent-blue);
             margin-top: 12px;
         }
-
+        p, ul, td, th {
+            font-size: 1rem;
+        }
         p {
-            margin-bottom: 13px;
+            margin-bottom: 18px;
         }
         ul {
             list-style: disc;
             margin-left: 27px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
+        /* ------ TABLES ------ */
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 19px 0;
-            font-size: 1em;
+            margin: 23px 0;
+            font-size: 0.98rem;
             background: #fff;
             box-shadow: 0 2px 12px rgba(32,40,80,0.07);
             border-radius: 14px;
@@ -149,7 +215,7 @@
         }
         table th, table td {
             border: none;
-            padding: 14px 11px;
+            padding: 13px 9px;
             text-align: left;
         }
         table th {
@@ -166,6 +232,7 @@
             background: #ffe8e8;
         }
 
+        /* ------ IMAGES ------ */
         img {
             max-width: 98%;
             height: auto;
@@ -177,41 +244,66 @@
             background: #fff;
         }
 
-        footer {
-            text-align: center;
-            padding: 22px 0 18px 0;
-            background: var(--footer-bg);
-            color: #e0e0e0;
-            font-size: 1em;
-            margin-top: 38px;
-            letter-spacing: 0.6px;
-            border-radius: 0 0 12px 12px;
+        /* ------ HIGHLIGHTS ------ */
+        .highlight {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue) 90%);
+            color: #fff;
+            border-radius: 8px;
+            padding: 14px 22px;
+            margin: 22px 0;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(67,233,123,0.08);
         }
 
-        /* Responsive adjustments */
+        /* ------ BUTTONS ------ */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink));
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 13px 0;
+            font-size: 1rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(255,94,98,0.10);
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-orange));
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(255,94,98,0.15);
+        }
+
+        /* ------ FOOTER ------ */
+        footer {
+            text-align: center;
+            padding: 24px 0 20px 0;
+            background: var(--footer-bg);
+            color: #e0e0e0;
+            font-size: 1.08rem;
+            margin-top: 44px;
+            letter-spacing: 0.6px;
+            border-radius: 0 0 16px 16px;
+        }
+
+        /* ------ RESPONSIVE ------ */
         @media (max-width: 1100px) {
             main {
                 max-width: 98vw;
-                padding: 10px 2vw;
+                padding: 18px 2vw;
             }
         }
         @media (max-width: 900px) {
             main {
                 max-width: 99vw;
-                padding: 9px 1vw;
+                padding: 13px 1vw;
             }
             section {
                 padding: 26px 7px;
             }
         }
         @media (max-width: 700px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav ul li {
-                margin: 6px 0;
-            }
             main {
                 margin: 15px 2vw;
                 padding: 7px 1vw;
@@ -221,476 +313,156 @@
                 padding: 16px 3vw;
             }
             h1 {
-                font-size: 1.4em;
+                font-size: 1.35rem;
             }
             h2 {
-                font-size: 1.1em;
+                font-size: 1.08rem;
+            }
+            body {
+                font-size: 15px;
             }
             table th, table td {
                 padding: 9px 4px;
                 font-size: 0.93em;
             }
         }
-
-        /* Card highlights for important blocks */
-        .highlight {
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue) 90%);
-            color: #fff;
-            border-radius: 8px;
-            padding: 10px 18px;
-            margin: 16px 0;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(67,233,123,0.08);
-        }
-
-        /* Button style for future use */
-        .btn {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink));
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 22px;
-            font-weight: bold;
-            text-decoration: none;
-            margin: 11px 0;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(255,94,98,0.10);
-        }
-        .btn:hover {
-            background: linear-gradient(90deg, var(--accent-pink), var(--accent-orange));
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(255,94,98,0.15);
-        }
     </style>
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <header>
-        <nav>
-            <ul>
+        <nav class="navbar">
+            <div class="navbar-logo">
+                IPL Analytics
+            </div>
+            <ul class="navbar-menu">
                 <li><a href="#introduction">Introduction</a></li>
-                <li><a href="#ipl-phenomenon">IPL Phenomenon</a></li>
-                <li><a href="#data-ecosystem">Data Ecosystem</a></li>
-                <li><a href="#tools">Tools of the Trade</a></li>
-                <li><a href="#on-field">On-Field Applications</a></li>
-                <li><a href="#off-field">Off-Field Applications</a></li>
-                <li><a href="#impact">Impact & "Moneyball"</a></li>
-                <li><a href="#case-studies">Case Studies</a></li>
-                <li><a href="#challenges">Challenges & Ethics</a></li>
-                <li><a href="#future">Future is Data-Driven</a></li>
-                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#on-field">On-Field</a></li>
+                <li><a href="#off-field">Off-Field</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li class="dropdown">
+                    <a href="#">More</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#ipl-phenomenon">IPL Phenomenon</a></li>
+                        <li><a href="#data-ecosystem">Data Ecosystem</a></li>
+                        <li><a href="#case-studies">Case Studies</a></li>
+                        <li><a href="#challenges">Challenges</a></li>
+                        <li><a href="#future">Future</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main>
         <section id="introduction">
-            <h1>Beyond the Sixes and Wickets: How Data Analytics is Revolutionizing the Indian Premier League</h1>
-            <p class="highlight">The roar of the crowd, the crack of the bat, the thrill of a last-ball finish – the Indian Premier League (IPL) is a spectacle unlike any other. But behind the on-field drama lies another story: the relentless, invisible work of data analytics.</p>
-            <p>Let's dive into how data is reshaping the world's premier T20 league.</p>
+            <h1>Beyond the Sixes and Wickets: IPL & Data Analytics</h1>
+            <p class="highlight">Welcome to a deep dive into how data analytics is revolutionizing the Indian Premier League, both on and off the field.</p>
+            <p>The Indian Premier League is more than just cricket—it's a multi-billion-dollar business, a cultural phenomenon, and a showcase for cutting-edge analytics. Let's explore how numbers are changing the game.</p>
         </section>
 
         <section id="ipl-phenomenon">
-            <h2>The IPL Phenomenon: A League Built on Scale</h2>
-            <p>First, let's appreciate the scale. The IPL isn't just cricket; it's a massive economic engine.</p>
-            <ul>
-                <li><strong>Global Reach:</strong> The most-watched T20 tournament globally.</li>
-                <li><strong>Economic Impact:</strong> Estimated contribution of $6.7 billion to India's GDP in 2020.</li>
-                <li><strong>Valuation:</strong> Surpassed $10 billion by 2022, reaching $12 billion in 2024.</li>
-                <li><strong>Media Rights:</strong> A staggering $6.4 billion deal for 2023-2027, making it the second-richest league per match globally (after the NFL).</li>
-            </ul>
-            <p class="highlight">This immense financial scale provides both the need and the means for teams to invest heavily in data analytics. When millions are on the line, intelligence is power.</p>
-            <img src="infographic_ipl_scale.png" alt="Infographic: IPL's Economic Impact and Growth - Visualizing Global Reach, GDP Contribution, Valuation Over Time, and Media Rights Value." />
+            <h2>IPL Phenomenon</h2>
+            <p>The IPL is the world's most lucrative T20 league, blending sports, entertainment, and business. Its immense popularity generates vast data—every ball, player, fan interaction, and transaction is an analytics opportunity.</p>
         </section>
 
         <section id="data-ecosystem">
-            <h2>The IPL Data Ecosystem: Fueling the Analytics Engine</h2>
-            <p>Effective analytics requires robust data. The IPL generates a torrent of information from diverse sources:</p>
+            <h2>Data Ecosystem</h2>
             <ul>
-                <li><strong>Match/Performance Data:</strong> Ball-by-ball commentary, detailed player stats (averages, strike rates, economy rates, boundaries, wickets, fielding actions).</li>
-                <li><strong>Contextual Data:</strong> Venue details, pitch conditions, weather, toss outcomes.</li>
-                <li><strong>Biometric/Physiological Data:</strong> Player fitness levels, injury history, real-time wearable sensor data (heart rate, fatigue, speed, biomechanics).</li>
-                <li><strong>Visual Data:</strong> High-speed cameras (like Hawk-Eye) for trajectory tracking and technical analysis.</li>
-                <li><strong>Commercial & Fan Data:</strong> Viewership stats, social media engagement (mentions, sentiment), fan behaviour/preferences, sponsorship values, revenue figures.</li>
-                <li><strong>Auction Data:</strong> Base prices, bids, final sale prices, retentions.</li>
+                <li>Match data: Ball-by-ball records, player stats, environmental factors.</li>
+                <li>Player tracking: Wearables, GPS, biometric sensors.</li>
+                <li>Fan & business data: Ticketing, social media, viewership, sales.</li>
             </ul>
-            <p>This data is collected through official channels (IPL/BCCI websites), third-party providers (ESPNcricinfo, Cricbuzz, Kaggle), commercial APIs, sensor technology (wearables, smart equipment), and more.</p>
-
-            <h3>Table 1: IPL Data Ecosystem Overview</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data Type</th>
-                        <th>Description</th>
-                        <th>Key Metrics</th>
-                        <th>Sources</th>
-                        <th>Collection Methods</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Match/Performance</td>
-                        <td>Ball-by-ball events, player & team stats</td>
-                        <td>Runs, Wickets, SR, Econ, Avg, 4s, 6s, Fielding actions</td>
-                        <td>Official Feeds, ESPNcricinfo, Cricbuzz, APIs, Kaggle</td>
-                        <td>Automated scoring, Manual entry, API integration</td>
-                    </tr>
-                    <tr>
-                        <td>Contextual</td>
-                        <td>Environmental & situational factors</td>
-                        <td>Pitch type, Weather conditions, Venue history, Toss outcome</td>
-                        <td>Match reports, Weather services, Historical data</td>
-                        <td>Observation, Sensor data, Data aggregation</td>
-                    </tr>
-                    <tr>
-                        <td>Biometric/Physiological</td>
-                        <td>Player physical state & workload</td>
-                        <td>Heart rate, Fatigue levels, Speed, Acceleration, Biomechanics, Injury history</td>
-                        <td>Wearable sensors (GPS, HR monitors, accelerometers), Medical records</td>
-                        <td>Sensor readings, Fitness tests, Medical assessments</td>
-                    </tr>
-                    <tr>
-                        <td>Visual</td>
-                        <td>Video footage & tracking data</td>
-                        <td>Ball trajectory, Player positioning, Shot/Delivery technique</td>
-                        <td>High-speed cameras (Hawk-Eye), Broadcast feeds</td>
-                        <td>Computer vision, Triangulation, Manual tagging</td>
-                    </tr>
-                    <tr>
-                        <td>Commercial/Fan</td>
-                        <td>Business & audience interaction data</td>
-                        <td>Viewership, Social media mentions/sentiment, Sponsorship value, Revenue, Fan demographics/preferences</td>
-                        <td>BARC/Nielsen, Social media platforms, Team apps, Financial reports</td>
-                        <td>Audience measurement, API scraping, Surveys, Sales data</td>
-                    </tr>
-                    <tr>
-                        <td>Auction</td>
-                        <td>Player acquisition data</td>
-                        <td>Base price, Bids, Final price, Retentions, Purse remaining</td>
-                        <td>Official IPL auction records, News reports</td>
-                        <td>Auction monitoring, Official announcements</td>
-                    </tr>
-                </tbody>
-            </table>
-            <img src="infographic_data_ecosystem.png" alt="Infographic: Flowchart illustrating the IPL Data Ecosystem - Showing data types, sources, and collection methods feeding into a central analytics engine." />
         </section>
 
         <section id="tools">
-            <h2>Tools of the Trade: Analyzing the IPL Data Deluge</h2>
-            <p>Making sense of this data requires a sophisticated tech stack:</p>
+            <h2>Tools of the Trade</h2>
+            <p>Teams and analysts use a mix of:</p>
             <ul>
-                <li><strong>Languages & Libraries:</strong> Python (with Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn) and R are dominant.</li>
-                <li><strong>Databases & Processing:</strong> SQL databases, real-time frameworks (Apache Kafka, Apache Flink).</li>
-                <li><strong>Machine Learning:</strong> Scikit-learn, TensorFlow, Keras, PyTorch, XGBoost for predictive modeling.</li>
-                <li><strong>Visualization:</strong> Tableau, Power BI for interactive dashboards.</li>
-                <li><strong>Cloud Platforms:</strong> AWS, Azure, Google Cloud for scalable storage and processing.</li>
-                <li><strong>Specialized Software:</strong> Hawk-Eye, potentially proprietary team systems.</li>
+                <li>Data visualization platforms (e.g., Tableau, Power BI)</li>
+                <li>Machine learning (Python, R, cloud ML tools)</li>
+                <li>Custom apps for scouting, injury management, and fan engagement</li>
             </ul>
-
-            <h3>Table 2: Common Data Analytics Tools & Technologies in IPL</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Specific Tool/Technology</th>
-                        <th>Primary Use Case</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Programming Languages</td>
-                        <td>Python, R</td>
-                        <td>Data manipulation, analysis, model building, visualization</td>
-                    </tr>
-                    <tr>
-                        <td>Core Libraries</td>
-                        <td>Pandas, NumPy, Matplotlib, Seaborn (Python); cricketdata (R)</td>
-                        <td>Data handling, numerical computation, plotting, statistical graphics</td>
-                    </tr>
-                    <tr>
-                        <td>Databases/Storage</td>
-                        <td>SQL Databases, Cloud Storage (AWS S3, Azure Blob, GCS)</td>
-                        <td>Storing structured match/player data, storing large unstructured data (video)</td>
-                    </tr>
-                    <tr>
-                        <td>Real-Time Processing</td>
-                        <td>Apache Kafka, Apache Flink</td>
-                        <td>Handling live data streams (e.g., for broadcast analytics, real-time predictions)</td>
-                    </tr>
-                    <tr>
-                        <td>Machine Learning Frameworks</td>
-                        <td>Scikit-learn, TensorFlow, Keras, PyTorch, XGBoost</td>
-                        <td>Building predictive models (performance, outcome, injury), player clustering</td>
-                    </tr>
-                    <tr>
-                        <td>Visualization Platforms</td>
-                        <td>Tableau, Power BI</td>
-                        <td>Creating interactive dashboards, reporting insights</td>
-                    </tr>
-                    <tr>
-                        <td>Cloud Platforms</td>
-                        <td>AWS, Azure, Google Cloud</td>
-                        <td>Scalable data storage, distributed computing, ML model training & deployment</td>
-                    </tr>
-                    <tr>
-                        <td>Specialized Software</td>
-                        <td>Weka, Dataiku, Hawk-Eye, Proprietary Team Software</td>
-                        <td>Data mining, specific analysis tasks (ball tracking), integrated team analytics</td>
-                    </tr>
-                    <tr>
-                        <td>Web Scraping Tools</td>
-                        <td>Beautiful Soup, Selenium (Python)</td>
-                        <td>Extracting data from websites when APIs are unavailable</td>
-                    </tr>
-                    <tr>
-                        <td>NLP Tools</td>
-                        <td>TextBlob, VADER, HuggingFace Transformers (Python)</td>
-                        <td>Sentiment analysis of social media data, text processing</td>
-                    </tr>
-                </tbody>
-            </table>
-             <img src="infographic_analytics_tools.png" alt="Infographic: Stack diagram or mind map of IPL Data Analytics Tools - Grouping languages, databases, ML frameworks, and visualization tools." />
         </section>
 
         <section id="on-field">
-            <h2>Data in Action: On-Field Applications</h2>
-            <p>Analytics isn't just theoretical; it directly impacts what happens on the pitch.</p>
-
-            <h3>Player Performance Analysis & Prediction:</h3>
-            <p>Going beyond averages to analyze consistency, pressure performance, specific matchups, and game phases. ML models (Regression, Classification, Clustering) predict future performance and player value.</p>
-
-            <h3>Team Strategy & Tactics:</h3>
+            <h2>On-Field Applications</h2>
             <ul>
-                <li><strong>Pre-Match:</strong> Opposition analysis, optimizing team combinations, batting orders, bowling rotations, and simulating match scenarios (Monte Carlo).</li>
-                <li><strong>Real-Time:</strong> Live data feeds support dugout analysts providing insights to captains/coaches for bowling changes, field placements, and timeout usage. Real-time win probabilities guide strategy.</li>
-                <li><strong>Outcome Prediction:</strong> ML models predict match winners with varying reported accuracies (some studies citing 70-98% depending on model and data).</li>
+                <li>Player selection and auction strategies</li>
+                <li>Real-time tactics (bowling changes, field placements)</li>
+                <li>Workload, fitness, and injury risk monitoring</li>
             </ul>
+            <p class="highlight">Data-driven insights can decide match outcomes—every run, wicket, and decision counts!</p>
+        </section>
 
-            <h3>Table 3: Comparison of Machine Learning Models for IPL Match Outcome/Score Prediction (Illustrative)</h3>
+        <section id="off-field">
+            <h2>Off-Field Applications</h2>
+            <ul>
+                <li>Fan engagement and personalized content</li>
+                <li>Marketing and sponsorship optimization</li>
+                <li>Dynamic ticket pricing</li>
+            </ul>
+        </section>
+
+        <section id="impact">
+            <h2>Impact & "Moneyball"</h2>
+            <p>The IPL has embraced the "Moneyball" philosophy, using analytics to uncover undervalued talent and maximize team performance within budget constraints.</p>
             <table>
                 <thead>
                     <tr>
-                        <th>Model Type</th>
-                        <th>Key Features Used (Examples)</th>
-                        <th>Reported Accuracy/Metric (Examples)</th>
-                        <th>Strengths</th>
-                        <th>Weaknesses</th>
+                        <th>Impact Area</th>
+                        <th>Analytics Example</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Random Forest (RF)</td>
-                        <td>Team stats, Venue, Toss, Player form, Historical data, Ball-by-ball data</td>
-                        <td>88-98% Accuracy (Outcome); R2=0.68 (Score)</td>
-                        <td>Robust to noise, Handles non-linearity & interactions, Good performance</td>
-                        <td>Can be computationally intensive, Less interpretable than simpler models</td>
+                        <td>Scouting</td>
+                        <td>Identifying emerging players from domestic circuits</td>
                     </tr>
                     <tr>
-                        <td>Logistic Regression (LR)</td>
-                        <td>Team stats, Venue, Toss, Player points</td>
-                        <td>51-68% Accuracy (Outcome); RMS=0.46 (Win Prob)</td>
-                        <td>Interpretable, Computationally efficient, Good for binary outcomes</td>
-                        <td>Assumes linearity, May underperform with complex relationships</td>
+                        <td>Performance</td>
+                        <td>Optimizing batting order using match-up data</td>
                     </tr>
                     <tr>
-                        <td>Support Vector Machine (SVM/SVC)</td>
-                        <td>Team stats, Player ranks, Historical data</td>
-                        <td>32-63% Accuracy (Outcome); 69.9% (Combined Model)</td>
-                        <td>Effective in high-dimensional spaces, Robust to outliers</td>
-                        <td>Sensitive to parameter tuning, Can be computationally expensive</td>
-                    </tr>
-                    <tr>
-                        <td>Multilayer Perceptron (MLP) / DNN</td>
-                        <td>Team weights, Venue, Toss, Team form, Head-to-head</td>
-                        <td>71.66% Accuracy (Outcome); Potential shown</td>
-                        <td>Captures complex non-linear patterns, Can model intricate relationships</td>
-                        <td>Requires large data, Prone to overfitting, "Black box" nature</td>
-                    </tr>
-                    <tr>
-                        <td>Linear Regression</td>
-                        <td>Ball-by-ball data, Team performance, Trends, Conditions</td>
-                        <td>R2=0.85 (Score); RMS=2.97 (Score)</td>
-                        <td>Simple, Interpretable</td>
-                        <td>Assumes linearity, Sensitive to outliers, May not capture complexity</td>
-                    </tr>
-                    <tr>
-                        <td>Gradient Boosting (GB)</td>
-                        <td>Team stats, Venue, Toss, Historical data</td>
-                        <td>~86.78% Accuracy (Outcome)</td>
-                        <td>High accuracy, Handles various data types</td>
-                        <td>Prone to overfitting if not tuned carefully, Can be complex</td>
-                    </tr>
-                    <tr>
-                        <td>K-Nearest Neighbors (KNN)</td>
-                        <td>Historical data, Toss factor</td>
-                        <td>49.34% Accuracy (Outcome); Toss-based model better</td>
-                        <td>Simple, Non-parametric</td>
-                        <td>Computationally expensive for large datasets, Sensitive to feature scaling</td>
-                    </tr>
-                    <tr>
-                        <td>LSTM (Deep Learning)</td>
-                        <td>Run rate, Wickets, Pitch behavior, Time series data</td>
-                        <td>Lower MSE than RF/XGBoost (Score)</td>
-                        <td>Models sequential dependencies, Good for time series</td>
-                        <td>Requires significant data, Computationally intensive</td>
+                        <td>Injury Prevention</td>
+                        <td>Flagging players with high workload risk</td>
                     </tr>
                 </tbody>
             </table>
-
-            <h3>Scouting & Auction Strategy:</h3>
-            <p>Data supplements traditional scouting. Performance data from various leagues, player tracking, and video analysis help identify undervalued talent (like T. Natarajan's yorker ability). Teams run auction simulations to optimize purchases and retentions.</p>
-
-            <h3>Player Welfare:</h3>
-            <p>Wearable sensors and biomechanical analysis monitor workload and fatigue. ML models predict injury risks, enabling personalized training, recovery protocols, and smarter player rotation policies.</p>
-            <img src="infographic_on_field_applications.png" alt="Infographic: Diagram showing how data analytics influences on-field decisions - Player performance, team strategy (pre-match & real-time), auction, welfare." />
-        </section>
-
-        <section id="off-field">
-            <h2>Data in Action: Off-Field Applications</h2>
-            <p>Analytics also drives the business side of the IPL.</p>
-
-            <h3>Fan Engagement:</h3>
-            <p>Understanding fan demographics, online behavior, and social media sentiment (using NLP) allows for personalized content delivery (news, highlights, stats) via apps and social media. Interactive features and gamification boost loyalty.</p>
-
-            <h3>Commercial Applications:</h3>
-            <p>Fan analytics attract sponsors by demonstrating targeted audience reach. Data measures sponsorship effectiveness. Data-driven marketing uses targeted ads and "moment marketing." Fan preferences shape merchandise and ticket offers.</p>
-
-            <h3>Broadcasting & Media:</h3>
-            <p>AI assists production (camera angles, automated highlights). NLP enhances commentary with real-time stats and insights. Broadcasts feature augmented graphics (win probabilities, Hawk-Eye visuals) powered by analytics.</p>
-             <img src="infographic_off_field_applications.png" alt="Infographic: Visual representation of how data analytics impacts off-field aspects - Fan engagement, commercial applications, and broadcasting." />
-        </section>
-
-        <section id="impact">
-            <h2>Impact and the "Moneyball" Question</h2>
-            <p>Has analytics led to more success? Evidence suggests a correlation:</p>
-            <ul>
-                <li>Teams report improved consistency, scouting, and tactical decisions.</li>
-                <li>Fan engagement metrics (viewership, social interaction) are rising.</li>
-                <li>Lucrative sponsorships are secured through data-informed pitches.</li>
-                <li>Prediction model accuracy is improving.</li>
-                <li>The IPL's overall brand value growth is partly attributed to its tech embrace.</li>
-            </ul>
-
-            <p class="highlight"><strong>Is it IPL Moneyball?</strong> The core idea of using stats to find undervalued talent (like RR's 2008 win) is relevant. However, the IPL differs from classic Moneyball: most teams now have access to similar data, so the edge comes from how well teams interpret and apply it.</p>
         </section>
 
         <section id="case-studies">
             <h2>Case Studies</h2>
-
-            <h3>Table 5: Summary of IPL Data Analytics Case Studies</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Team/Entity</th>
-                        <th>Focus Area</th>
-                        <th>Key Analytics/Tech Used</th>
-                        <th>Outcome/Impact (Reported/Implied)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Royal Challengers Bengaluru (RCB)</td>
-                        <td>Player Evaluation, Performance Enhancement</td>
-                        <td>AI/Analytics (IIT Madras), Predictive Models (ball-by-ball updates), AI Scouting Filters</td>
-                        <td>Identified net bowler potential, Enhanced player skills, Rectified team problems</td>
-                    </tr>
-                    <tr>
-                        <td>Mumbai Indians (MI)</td>
-                        <td>Strategy, Sponsorship, Early Adoption</td>
-                        <td>"Cricket 21" Software, Fanbase Analytics</td>
-                        <td>Consistent performance, Leading sponsorship revenue ($14M jersey deal), Early competitive advantage</td>
-                    </tr>
-                    <tr>
-                        <td>Gujarat Titans (GT)</td>
-                        <td>Team Combination, Auction Strategy</td>
-                        <td>Predictive Modeling, Simulations, Weather/Pitch Analysis</td>
-                        <td>Debut season win (IPL 2022), Optimized player combinations</td>
-                    </tr>
-                    <tr>
-                        <td>Kolkata Knight Riders (KKR)</td>
-                        <td>Player Recruitment, Fan Engagement</td>
-                        <td>"Moneyball" Software, CometChat Integration</td>
-                        <td>Data-informed recruitment, Enhanced fan interaction via app</td>
-                    </tr>
-                    <tr>
-                        <td>Rajasthan Royals (RR)</td>
-                        <td>Scouting, Auction Strategy, Early Adoption</td>
-                        <td>Data Analyst Team, RTM Analytics, 'Moneyball' approach (early seasons)</td>
-                        <td>Identified undervalued talent (early success), Strategic use of RTM</td>
-                    </tr>
-                    <tr>
-                        <td>Delhi Capitals (DC)</td>
-                        <td>Selection, Player Development</td>
-                        <td>Data-linked Dashboards (Tableau mentioned in related context)</td>
-                        <td>Revamped approach to selection and development</td>
-                    </tr>
-                    <tr>
-                        <td>Punjab Kings (PBKS)</td>
-                        <td>Auction Strategy</td>
-                        <td>AI-based Matchup Analytics</td>
-                        <td>Shift from intuition to data-confirmed auction buys, Smarter/more consistent purchases</td>
-                    </tr>
-                    <tr>
-                        <td>T. Natarajan (Scouting)</td>
-                        <td>Talent Identification</td>
-                        <td>Video/Statistical Analysis, Player Tracking Data</td>
-                        <td>Identified specific valuable skill (yorkers) in lesser-known player, Led to successful IPL career</td>
-                    </tr>
-                </tbody>
-            </table>
-            <img src="infographic_case_studies.png" alt="Infographic: Bar chart or comparative matrix summarizing key outcomes and analytics approaches of different IPL teams mentioned in case studies." />
+            <p>Several IPL franchises have built analytics teams that directly impact their success. For instance, Mumbai Indians and Rajasthan Royals are known for data-backed decision making.</p>
         </section>
 
         <section id="challenges">
-            <h2>Challenges and Ethics: The Other Side of the Data Coin</h2>
-            <p>Despite the benefits, challenges remain:</p>
+            <h2>Challenges & Ethics</h2>
             <ul>
-                <li><strong>Data Issues:</strong> Ensuring data availability, quality, consistency, and managing volume/complexity.</li>
-                <li><strong>Model Limitations:</strong> The "black box" problem (lack of interpretability in complex models), potential over-reliance on numbers overlooking qualitative factors (morale, leadership, form).</li>
-                <li><strong>Implementation:</strong> Bridging the gap between analysts and coaches/players, the cost of sophisticated analytics programs potentially creating resource gaps between teams.</li>
-                <li><strong>Ethics:</strong>
-                    <ul>
-                        <li><strong>Player Privacy:</strong> Collection of biometric/health data raises significant concerns. Consent, security, and data protection are crucial.</li>
-                        <li><strong>Data Ownership:</strong> Who owns player-generated data? Clear governance is needed.</li>
-                        <li><strong>Algorithmic Bias:</strong> Models trained on biased historical data can perpetuate unfairness in scouting or valuation.</li>
-                        <li><strong>Misuse for Betting:</strong> Predictive insights could create information asymmetry and integrity risks for betting markets.</li>
-                    </ul>
-                </li>
+                <li>Data privacy and security (player biometrics, fan data)</li>
+                <li>Ensuring fairness—avoiding misuse or overfitting</li>
+                <li>Bridging analytics and traditional cricketing wisdom</li>
             </ul>
-            <img src="infographic_challenges_ethics.png" alt="Infographic: Quadrant chart or Venn diagram highlighting challenges (data, model, implementation) and ethical concerns (privacy, ownership, bias, betting)." />
         </section>
 
         <section id="future">
-            <h2>The Future is Data-Driven</h2>
-            <p class="highlight">Expect even deeper integration: Tech advancements, evolving applications, and new ethical frontiers will define the IPL's next era.</p>
-            <ul>
-                <li><strong>Tech Advancements:</strong> More complex AI/ML (Deep Learning, Reinforcement Learning, Generative AI), crucial Explainable AI (XAI), advanced sensors/wearables, better computer vision, AR/VR, 5G.</li>
-                <li><strong>Evolving Applications:</strong> Hyper-personalization (fans, players), sophisticated strategy simulations, automated global scouting, smarter stadiums (operations, fan experience).</li>
-            </ul>
-            <img src="infographic_future_trends.png" alt="Infographic: Timeline or roadmap illustrating future trends and tech advancements in IPL data analytics, such as AI, XAI, AR/VR, 5G." />
+            <h2>Future is Data-Driven</h2>
+            <p>Expect further integration of AI, real-time data feeds, and fan interactivity. The IPL is set to remain a global leader in sports analytics adoption.</p>
         </section>
 
         <section id="conclusion">
-            <h2>The Final Over</h2>
-            <p class="highlight">Data analytics is no longer a novelty in the IPL; it's a core component of success, both on and off the field. It drives strategy, uncovers talent, engages fans, and fuels commercial growth. In the IPL, the numbers are as crucial as the runs and wickets.</p>
+            <h2>Conclusion</h2>
+            <p class="highlight">Data analytics is transforming the IPL at every level—from match results to fan engagement. The game will never be the same again!</p>
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 Sridhar Gande. All rights reserved.</p>
+        &copy; 2025 IPL Analytics &middot; Crafted for insights and impact
     </footer>
-
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
