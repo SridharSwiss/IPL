@@ -82,16 +82,45 @@
         }
 
         /* Main Content Area */
-        main {
-            max-width: 960px; /* Slightly wider for professional look */
-            margin: 40px auto;
-            padding: 30px 40px;
-            background-color: var(--background-white);
-            box-shadow: 0 0 20px rgba(0,0,0,0.08);
-            border-radius: 10px;
-            position: relative; /* For z-index to work against body background */
-            z-index: 1;
-        }
+main {
+    max-width: 960px;
+    width: 95vw;            /* Allows main to nearly fill the viewport width on small screens */
+    margin: 40px auto;
+    padding: 30px 4vw;      /* Responsive horizontal padding */
+    background-color: var(--background-white);
+    box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+    main {
+        max-width: 98vw;
+        padding: 25px 3vw;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    main {
+        padding: 16px 2vw;
+        margin: 16px auto;
+        width: 99vw;        /* Use nearly the full screen width */
+        box-sizing: border-box;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    main {
+        padding: 8px 1vw;
+        margin: 8px auto;
+        width: 100vw;       /* Fill the whole viewport */
+        border-radius: 0;   /* Optionally remove rounded corners for edge-to-edge look */
+    }
+}
 
         /* Section Styling */
         section {
