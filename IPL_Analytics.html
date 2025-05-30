@@ -101,6 +101,18 @@ main {
         padding: 25px 3vw;
     }
 }
+/* Responsive Table Container */
+@media (max-width: 768px) {
+  .responsive-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-bottom: 24px;
+  }
+  table {
+    min-width: 600px; /* or set to the actual table width needed */
+  }
+}        
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
@@ -716,6 +728,7 @@ main {
             </div>
 
             <h3>Table 1: IPL Data Ecosystem Overview</h3>
+            <div class="responsive-table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -771,6 +784,7 @@ main {
                     </tr>
                 </tbody>
             </table>
+            </div>    
         </section>
 
         <section id="tools">
@@ -820,6 +834,7 @@ main {
             </div>
 
             <h3>Table 2: Common Data Analytics Tools & Technologies in IPL</h3>
+            <div class="responsive-table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -881,6 +896,7 @@ main {
                     </tr>
                 </tbody>
             </table>
+            </div>    
         </section>
 
         <section id="on-field">
@@ -932,6 +948,7 @@ main {
             </div>
 
             <h3>Table 3: Comparison of Machine Learning Models for IPL Match Outcome/Score Prediction (Illustrative)</h3>
+            <div class="responsive-table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -1001,6 +1018,7 @@ main {
                     </tr>
                 </tbody>
             </table>
+            </div>    
         </section>
 
         <section id="off-field">
@@ -1105,6 +1123,7 @@ main {
             </div>
 
             <h3>Table 5: Summary of IPL Data Analytics Case Studies</h3>
+            <div class="responsive-table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -1165,6 +1184,7 @@ main {
                     </tr>
                 </tbody>
             </table>
+            </div>    
         </section>
 
         <section id="challenges">
